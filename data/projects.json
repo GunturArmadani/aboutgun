@@ -1,5 +1,19 @@
 [
   {
+    "id": "keren-pokoknya",
+    "title": "KEREN POKOKNYA",
+    "description": "Gatau",
+    "status": "Tired",
+    "year": 2026,
+    "featured": false,
+    "size": "small",
+    "technologies": [],
+    "tags": [
+      "Ular"
+    ],
+    "github": "https://github.com"
+  },
+  {
     "id": "hei",
     "title": "Hei",
     "description": "Gadis",
