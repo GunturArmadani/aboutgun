@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Project archive by Guntur Armadani.">
+  <title>Project — Guntur Armadani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="nav glass">
+    <a class="brand" href="index.html#home"><span class="brand-mark">G</span><span><b>Guntur Armadani</b><small>/ paracetamoladdict</small></span></a>
+    <nav class="nav-links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#projects">Projects</a></nav>
+  </header>
+  <main class="detail-page" id="project-detail"><div class="project-loading">Loading project…</div></main>
+  <footer><div><b>Guntur Armadani</b><span> / ParacetamolAddict</span></div><p>Making things, one questionable idea at a time.</p><small>© <span id="year"></span> Guntur Armadani</small></footer>
+<script>
+const esc=(v='')=>String(v).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));
+function renderProject(p){
+  document.title=`${p.title} — Guntur Armadani`;
+  const github=p.github ? `<a class="detail-github" href="${esc(p.github)}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> View on GitHub <i class="fa-solid fa-arrow-up-right-from-square"></i></a>` : `<span class="detail-github unavailable"><i class="fa-brands fa-github"></i> GitHub link will be added later</span>`;
+  document.getElementById('project-detail').innerHTML=`
+    <section class="simple-detail reveal">
+      <a class="detail-back" href="index.html#projects"><i class="fa-solid fa-arrow-left"></i> Back to Projects</a>
+      <div class="simple-detail-card glass">
+        ${p.thumbnail?`<img class="simple-detail-image" src="${esc(p.thumbnail)}" alt="${esc(p.title)} project screenshot">`:''}
+        <div class="simple-detail-copy">
+          <span class="section-label"><i class="fa-solid fa-folder-open"></i> Project</span>
+          <h1>${esc(p.title)}</h1>
+          <p>${esc(p.description)}</p>
+          ${github}
+        </div>
+      </div>
+    </section>`;
+  refreshReveal();
+}
+let revealItems=[],ticking=false;
+function updateReveal(){const vh=innerHeight||document.documentElement.clientHeight;revealItems.forEach(el=>{const r=el.getBoundingClientRect();el.classList.toggle('is-visible',r.top<vh*.92&&r.bottom>vh*.04)});ticking=false}
+function refreshReveal(){revealItems=[...document.querySelectorAll('.reveal')];updateReveal()}
+function requestReveal(){if(!ticking){ticking=true;requestAnimationFrame(updateReveal)}}
+addEventListener('scroll',requestReveal,{passive:true});addEventListener('resize',requestReveal);document.getElementById('year').textContent=new Date().getFullYear();
+fetch('data/projects.json').then(r=>r.json()).then(ps=>{const id='flappy-bird',p=ps.find(x=>x.id===id);if(!p){document.getElementById('project-detail').innerHTML='<section class="detail-empty glass"><h1>Project not found.</h1><a href="index.html#projects">← Back to Projects</a></section>';return}renderProject(p)}).catch(()=>{document.getElementById('project-detail').innerHTML='<section class="detail-empty glass"><h1>Project data could not load.</h1><p>Run the website through Live Server.</p></section>'});
+</script>
+</body></html>

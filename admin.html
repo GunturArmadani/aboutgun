@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Portfolio Admin — Guntur Armadani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="style.css"><link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-body">
+  <main class="admin-shell">
+    <header class="admin-top"><div><span class="admin-kicker">PRIVATE WORKSPACE</span><h1>Portfolio Admin</h1><p>Publish projects without touching HTML or JSON.</p></div><a class="admin-view" href="index.html#projects"><i class="fa-solid fa-arrow-up-right-from-square"></i> View portfolio</a></header>
+
+    <section id="login-screen" class="admin-login-wrap">
+      <form id="login-form" class="admin-card admin-login-card">
+        <div class="login-lock"><i class="fa-solid fa-lock"></i></div>
+        <div><span class="admin-kicker">ADMIN ACCESS</span><h2>Unlock publisher</h2><p>Enter the private ADMIN_KEY stored in your Cloudflare Worker.</p></div>
+        <label>Admin Key<input id="login-key" type="password" autocomplete="current-password" required placeholder="Enter your ADMIN_KEY"></label>
+        <button class="admin-publish" type="submit"><i class="fa-solid fa-arrow-right-to-bracket"></i> Continue</button>
+        <p class="login-help">The key stays only in this tab and is never saved to GitHub.</p>
+      </form>
+    </section>
+
+    <section id="publisher-screen" hidden>
+      <div class="admin-note"><i class="fa-solid fa-shield-halved"></i><div><b>Admin unlocked for this tab</b><span>Publishing still requires the Worker to verify your key before GitHub can be changed.</span></div><button id="lock-admin" type="button" class="admin-lock"><i class="fa-solid fa-lock"></i> Lock</button></div>
+      <section class="admin-grid">
+        <form id="project-form" class="admin-card">
+          <div class="admin-card-head"><div><small>NEW ENTRY</small><h2>Add project</h2></div><button type="button" class="admin-reset" id="reset-form">Clear</button></div>
+          <label>Project type<div class="type-picker"><input type="radio" name="size" id="featured" value="featured" checked><label for="featured"><i class="fa-regular fa-image"></i><b>Featured</b><small>Image card</small></label><input type="radio" name="size" id="small" value="small"><label for="small"><i class="fa-solid fa-list"></i><b>Small Project</b><small>Text list</small></label></div></label>
+          <label>Project name<input id="title" required placeholder="e.g. Tiny Password Checker"></label>
+          <label>Short description<textarea id="description" required rows="4" placeholder="What is this project?"></textarea></label>
+          <div class="admin-two"><label>Status<input id="status" placeholder="Completed / Experiment"></label><label>Year<input id="year" type="number" min="2000" max="2100"></label></div>
+          <label>Tags <span class="hint">separate with commas</span><input id="tags" placeholder="Cybersecurity, Python"></label>
+          <label>GitHub link <span class="hint">optional</span><input id="github" type="url" placeholder="https://github.com/..."></label>
+          <label id="image-field">Project image <span class="hint">featured only</span><div class="image-drop"><input id="image" type="file" accept="image/jpeg,image/png,image/webp"><div id="image-empty"><i class="fa-regular fa-image"></i><b>Choose an image</b><small>JPG, PNG or WebP · max 4 MB</small></div><img id="image-preview" alt="Project preview"></div></label>
+          <button class="admin-publish" type="submit"><i class="fa-solid fa-cloud-arrow-up"></i> Publish to Portfolio</button>
+        </form>
+        <aside class="admin-card admin-library"><div class="admin-card-head"><div><small>LIVE PUBLISHER</small><h2>Publish status</h2></div><span class="count-pill"><i class="fa-brands fa-github"></i></span></div><div class="admin-empty admin-guide">A successful publish writes directly to <b>data/projects.json</b> in GitHub. Featured project images are uploaded to <b>assets/projects/</b>. The public portfolio reads only that GitHub data.</div><div id="publish-status" class="publish-status">Ready to publish.</div></aside>
+      </section>
+    </section>
+  </main>
+<script src="js/admin.js"></script>
+</body></html>

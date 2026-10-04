@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Projects by Guntur Armadani — ParacetamolAddict.">
+  <title>Projects — Guntur Armadani</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div><div class="ambient ambient-b"></div>
+  <header class="nav glass">
+    <a class="brand" href="index.html#home"><span class="brand-mark">G</span><span><b>Guntur Armadani</b><small>/ paracetamoladdict</small></span></a>
+    <nav class="nav-links"><a href="index.html#home">Home</a><a href="index.html#about">About</a><a href="index.html#projects">Projects</a></nav>
+  </header>
+  <main class="archive-page">
+    <section class="archive-hero reveal">
+      <span class="section-label"><i class="fa-solid fa-folder-open"></i> Projects</span>
+      <h1>Things I've made.</h1>
+      <p>Games, experiments, tools, and other things I built while learning how stuff works. The bigger projects get visual cards; smaller experiments stay in a simple archive.</p>
+    </section>
+    <div id="projects-archive"><div class="project-loading">Loading projects…</div></div>
+  </main>
+  <footer><div><b>Guntur Armadani</b><span> / ParacetamolAddict</span></div><p>Making things, one questionable idea at a time.</p><small>© <span id="year"></span> Guntur Armadani</small></footer>
+  <script src="js/projects.js" defer></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    let revealItems = [...document.querySelectorAll('.reveal')]; let revealTicking = false;
+    function updateReveal(){const vh=window.innerHeight||document.documentElement.clientHeight;const enterTop=vh*.92,leaveBottom=vh*.04;revealItems.forEach(item=>{const rect=item.getBoundingClientRect();item.classList.toggle('is-visible',rect.top<enterTop&&rect.bottom>leaveBottom)});revealTicking=false}
+    window.refreshReveal=function(){revealItems=[...document.querySelectorAll('.reveal')];updateReveal()};
+    function requestRevealUpdate(){if(!revealTicking){revealTicking=true;requestAnimationFrame(updateReveal)}}
+    window.addEventListener('scroll',requestRevealUpdate,{passive:true});window.addEventListener('resize',requestRevealUpdate);window.addEventListener('load',updateReveal);updateReveal();
+  </script>
+</body></html>
