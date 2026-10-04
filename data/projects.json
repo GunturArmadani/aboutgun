@@ -1,5 +1,20 @@
 [
   {
+    "id": "hei",
+    "title": "Hei",
+    "description": "Gadis",
+    "status": "Bermata",
+    "year": 2026,
+    "featured": true,
+    "size": "featured",
+    "technologies": [],
+    "tags": [
+      "Coklat"
+    ],
+    "github": "https://github.com",
+    "thumbnail": "assets/projects/hei/cover.jpg"
+  },
+  {
     "id": "woiii",
     "title": "Woiii",
     "description": "Turut",
